@@ -1,51 +1,37 @@
-var http = require("http");
-var express = require('express');
-var app = express();
-var router = express.Router(); // this one and var app = express(); work the same way 
-// require the bcrypt module
-//var bcrypt = require('bcrypt');
-var bodyParser = require('body-parser');
-//var session = require('express-session')
-// this will bring the code for database connection
-var connection = require('./conn/conn'); // this path goes out the current directory and goes to find connction  
+const express = require('express');
+const mysql = require('mysql');
+const bodyParser = require('body-parser');
 
+const PORT = 3000;  // this is the port our express server will run on
+const app = express(); // this is an instance of express
 
-//initializing routes
-//var login = require('./routes/login');
-//var registration = require('./routes/register');
+var connection = require('./conn/conn');
 
-//we are using app because of express
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
-//this is the server for 
-var server = app.listen(3000, "127.0.0.1", function () {
- 
-    var host = server.address().address
-    var port = server.address().port
-   
-    console.log(" listening at http://%s:%s", host, port)
-   
-  });
 
-  app.get('/', function(req, res) {
-    console.log("First test")
-});
+//initializing routes
+var login = require('./routes/login');
+var registration = require('./routes/register');
+
+//code to test the get function
+
+app.get('/',function(request,response){
+
+     response.send('hello from the server');
+})
+
+
+
+app.listen(PORT,function(){
+
+    console.log('server running on localhost:' + PORT);
+})
 
 //routers for login and registration
-//app.post('/registration',registration.register);
-//app.post('/login',login.login);
-
-
-
-
-
-
-
-
-
-
-
+app.post('/registration',registration.register);
+app.post('/login',login.login);
 
