@@ -1,23 +1,26 @@
-const mysql = require('mysql');
-const express = require('express');
+//this is the only one needed here 
+var mysql = require('mysql');
+
+//npm isntall sql
 
 
-const mysqlConn =mysql.createConnection({
-
-  host:'localhost',
-  user:'root',
-  password:'',
-  database:'rms_db'
-
+//connect to database
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'labbookingsystem'
+});
+ 
+ 
+connection.connect(function(err) {
+  if (err)
+  {
+	  throw err
+	  console.log('You are not connected with mysql database...')
+  }else{
+  console.log('You are now connected with mysql database...')
+  }
 })
 
-
-mysqlConn.connect((err)=>{
-
-if(!err)
-    console.log('db connection succeed');
-else
-    console.log('db connection failed');
-});
-
-module.exports =mysqlConn;
+module.exports = connection;
