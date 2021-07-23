@@ -11,21 +11,21 @@ exports.register =async function(request, response)
     var stuNumber = request.body.stuNumber;
     var name = request.body.name;
     var surname = request.body.surname;
-    //var email = request.body.Email;
+    var email = request.body.Email;
     var password = request.body.password;
 	var confirm = request.body.confirm;
       
     
     console.log(name);
 	console.log(surname);
-	//console.log(email);
+	console.log(email);
 	console.log(stuNumber); 
     console.log(password);
     console.log(confirm);
 
 
 
-    if ( stuNumber && name && surname && password && confirm) 
+    if ( stuNumber && name && surname && email && password && confirm ) 
     {
         // check if user exists
           
@@ -43,9 +43,9 @@ exports.register =async function(request, response)
                                         "stud_no":request.body.stuNumber,
                                         "stu_name":request.body.name,
                                         "stud_surname":request.body.surname,          
-                                       // "email":request.body.Email,
+                                        "email":request.body.Email,
                                         "password":request.body.password, 
-                                        "is_verified":request.body.confirm,
+                                        "confirm":request.body.confirm,
                                
                                     }
                                     

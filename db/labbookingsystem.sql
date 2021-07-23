@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2021 at 03:15 PM
+-- Generation Time: Jul 23, 2021 at 01:47 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -95,9 +95,18 @@ CREATE TABLE `student` (
   `stud_no` int(9) NOT NULL,
   `stu_name` varchar(255) NOT NULL,
   `stud_surname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `is_verified` tinyint(1) NOT NULL
+  `confirm` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`stud_no`, `stu_name`, `stud_surname`, `email`, `password`, `confirm`) VALUES
+(216646758, 'ricky', 'tala', 'rickymero@gmail.com', 'a', 'a'),
+(216646797, 'godfrey', 'tala', 'gee@gmail.com', 'a', 'a');
 
 -- --------------------------------------------------------
 
@@ -196,7 +205,7 @@ ALTER TABLE `slot`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `stud_no` int(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `stud_no` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216646798;
 
 --
 -- AUTO_INCREMENT for table `student_record`
