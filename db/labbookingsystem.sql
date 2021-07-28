@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2021 at 01:47 PM
+-- Generation Time: Jul 28, 2021 at 02:51 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -105,8 +105,8 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`stud_no`, `stu_name`, `stud_surname`, `email`, `password`, `confirm`) VALUES
-(216646758, 'ricky', 'tala', 'rickymero@gmail.com', 'a', 'a'),
-(216646797, 'godfrey', 'tala', 'gee@gmail.com', 'a', 'a');
+(216646797, 'Godfrey', 'Mabena', '216646797@tut4life.ac.za', '1234', '1234'),
+(217409950, 'Ricky', 'Tala', '217409950@tut4life.ac.za', '1234', '1234');
 
 -- --------------------------------------------------------
 
@@ -117,9 +117,28 @@ INSERT INTO `student` (`stud_no`, `stu_name`, `stud_surname`, `email`, `password
 CREATE TABLE `student_record` (
   `stud_no` int(11) NOT NULL,
   `stud_name` varchar(255) NOT NULL,
-  `email` int(11) NOT NULL,
-  `ID` int(11) NOT NULL
+  `surname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_record`
+--
+
+INSERT INTO `student_record` (`stud_no`, `stud_name`, `surname`, `email`) VALUES
+(212208124, 'Mpho', 'Nyambeni', '212208124@tut4life.ac.za'),
+(214021170, 'Keletso ', 'Rangoako', '214021170@tut4life.ac.za'),
+(214468824, 'Vutlharhi', 'Magayisa', '214468824@tut4life.ac.za'),
+(215040895, 'sinethemba  ', 'Khoza ', '215040895@tut4life.ac.za'),
+(215416321, 'Mpho', 'Chauke', '215416321@tut4life.ac.za'),
+(216114345, 'nontobeko', 'Khoza', '216114345@tut4life.ac.za'),
+(216210166, 'Siphesihle ', 'Mofokeng', '216210166@tut4life.ac.za'),
+(216579615, 'lebogang ', 'Masanabo', '216579615@tut4life.ac.za'),
+(216646797, 'Godfrey', 'Mabena', '216646797@tut4life.ac.za'),
+(216861841, 'Amanda ', 'khumalo', '216861841@tut4life.ac.za'),
+(217409950, 'Ricky', 'Tala', '217409950@tut4life.ac.za'),
+(217582415, 'Dineo', 'Nakana', '217582415@tut4life.ac.za'),
+(218418902, 'Mndeni', 'Shongwe', '218418902@tut4life.ac.za');
 
 --
 -- Indexes for dumped tables
@@ -205,13 +224,13 @@ ALTER TABLE `slot`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `stud_no` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216646798;
+  MODIFY `stud_no` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217409951;
 
 --
 -- AUTO_INCREMENT for table `student_record`
 --
 ALTER TABLE `student_record`
-  MODIFY `stud_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `stud_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218418903;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
