@@ -16,6 +16,10 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 //initializing routes
 var login = require('./routes/login');
 var registration = require('./routes/register');
+var forgotPassword = require('./routes/forgot_Password');
+
+
+
 
 //code to test the get function
 
@@ -34,4 +38,4 @@ app.listen(PORT,function(){
 //routers for login and registration
 app.post('/registration',registration.register);
 app.post('/login',login.login);
-
+app.post('/forgotPassword',forgotPassword.forgotPassword);
