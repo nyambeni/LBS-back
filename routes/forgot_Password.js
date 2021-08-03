@@ -9,20 +9,17 @@ exports.forgotPassword =async function(request, response)
     console.log(stuNumber);
     console.log(email);
 
-    if(stuNumber){
-        if(email){
-
-            response.send('success'); 
+    
+    connection.query('select * from student where stud_no = ? ',[stuNumber], function(error, results, fields) {
+    
+        if(results.legnth > 0){
+              
+            response.send('write code to send email');
 
         }
-        else{
-            response.send('enter your your email'); 
-        }
-       
-    }
-    else{
-        response.send('enter your student number');
-    }
-
-
+    
+    })
 }
+    
+
+
