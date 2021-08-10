@@ -10,11 +10,19 @@ exports.forgotPassword =async function(request, response)
     console.log(email);
 
     
-    connection.query('SELECT * FROM student where stud_no = ?', [stuNumber], function(error, results, fields)  {
+    connection.query('SELECT password FROM student where stud_no = ?', [stuNumber], function(error, results, fields)  {
     
         if (results.length > 0){
-              
-            response.send('write code to send email');
+
+            var pas = results//this string returns the users password
+            response.send(pas);
+
+            //write a code to send email with that pas string
+
+
+
+
+
             
         }
         else{

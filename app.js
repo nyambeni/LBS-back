@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 
 const PORT = 3000;  // this is the port our express server will run on
+//Access-Control-Allow-Origin: http://localhost:3000;
 const app = express(); // this is an instance of express
 
 var connection = require('./conn/conn');
@@ -11,6 +12,14 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,DELETE,PUT,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Accept');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();    
+});
 
 
 //initializing routes
