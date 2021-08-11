@@ -29,18 +29,11 @@ exports.register =async function(request, response)
 
     if ( stuNumber && name && surname && email && password && confirm ) 
     {
-        
-           
-
             connection.query('select * from student_record where stud_no = ? ',[stuNumber], function(error, results, fields) {
 
             if(results.length > 0) { // if the student exist it should continue executing 
 
                 if(email == stringEmail){
-
-                }else{
-                    response.send('Please enter your tut4life email in this format studentnumber@tut4life.ac.za');	
-                }
 
                 
                 // check if user exists
@@ -51,9 +44,8 @@ exports.register =async function(request, response)
                 {
                     response.send('User Already has an account');
                 }else{
-                    if(password == confirm){ //if statement for password confirmation
-                    
-                    
+                    if(password == confirm ){ // end of if statement for password confirmation//if statement for password confirmation
+    
                     //if the user is not found
                     
                                     var today = new Date();
@@ -66,10 +58,7 @@ exports.register =async function(request, response)
                                         "password":request.body.password, 
                                         "confirm":request.body.confirm,
                                
-                                    }
-                                    
-                                    
-                                    
+                                    } 
                                     connection.query('INSERT INTO student SET ?',[student1], function (error, results, fields) {
                                       if (error) {
                                        
@@ -81,23 +70,26 @@ exports.register =async function(request, response)
                                         
                                       }
                                     });//end of inserting data
-                                }else{
-               
-                                    response.send('password dont match');
-                    
-                                }// end of if statement for password confirmation
+                    }else{
+    
+                        response.send('password dont match');
+        
+                    }
                   
                 }		//end of the if when the user  is not found		
         
                 
      
             });//end of searching for a user
+        }else{
+            response.send('Please enter your tut4life email in this format studentnumber@tut4life.ac.za');	
         }
-        else{
-          
-            response.send('Not a registered tut student');	
+    }
+    else{
+        
+        response.send('Not a registered tut student');	
 
-        }
+    }
 
 
         })//end of query that checks if student ios registered 

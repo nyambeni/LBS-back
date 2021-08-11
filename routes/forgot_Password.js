@@ -6,11 +6,11 @@ exports.forgotPassword =async function(request, response)
     var stuNumber = request.body.stuNumber;
     var email = request.body.email;
     
-    console.log(stuNumber);
+    //console.log(stuNumber);
     console.log(email);
 
     
-    connection.query('SELECT password FROM student where stud_no = ?', [stuNumber], function(error, results, fields)  {
+    connection.query('SELECT password FROM student where email = ?', [email], function(error, results, fields)  {
     
         if (results.length > 0){
 
