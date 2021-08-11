@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2021 at 09:36 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Aug 11, 2021 at 09:13 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,11 +28,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `staff_no` int(11) NOT NULL,
-  `staff_name` varchar(255) NOT NULL,
-  `staff_surname` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `Admin_ID` int(11) NOT NULL,
+  `Admin_Name` varchar(255) NOT NULL,
+  `Admin_Surname` varchar(255) NOT NULL,
+  `Admin_Email` varchar(255) NOT NULL,
+  `Admin_Pass` varchar(255) NOT NULL,
+  `Booking_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`Admin_ID`, `Admin_Name`, `Admin_Surname`, `Admin_Email`, `Admin_Pass`, `Booking_ID`) VALUES
+(216646797, 'Godfrey', 'Mabena', 'Godfrey555mabena@gmail.com', '1234', 0);
 
 -- --------------------------------------------------------
 
@@ -41,12 +50,12 @@ CREATE TABLE `admin` (
 --
 
 CREATE TABLE `booking` (
-  `booking_no` int(11) NOT NULL,
-  `lab_name` varchar(255) NOT NULL,
-  `availability` int(11) NOT NULL,
-  `capacity` int(11) NOT NULL,
-  `slot_no` int(11) NOT NULL,
-  `lab_no` int(11) NOT NULL
+  `Booking_ID` int(11) NOT NULL,
+  `Lab_Name` varchar(255) NOT NULL,
+  `Session` int(11) NOT NULL,
+  `Num_Bookings` int(11) NOT NULL,
+  `Stud_ID` int(11) NOT NULL,
+  `Lec_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -56,9 +65,9 @@ CREATE TABLE `booking` (
 --
 
 CREATE TABLE `lab` (
-  `lab_no` int(11) NOT NULL,
-  `lab_name` varchar(255) NOT NULL,
-  `capacity` int(11) NOT NULL
+  `Lab_Name` varchar(255) NOT NULL,
+  `Lab_Capacity` int(11) NOT NULL,
+  `Lab_Duration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -83,7 +92,9 @@ CREATE TABLE `lab_record` (
 CREATE TABLE `lecture` (
   `lec_id` int(11) NOT NULL,
   `lec_name` int(11) NOT NULL,
-  `lec_email` int(11) NOT NULL
+  `lec_email` int(11) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `confirm` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -116,7 +127,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`stud_no`, `stu_name`, `stud_surname`, `email`, `password`, `confirm`) VALUES
-(216646797, 'Godfrey', 'Mabena', '216646797@tut4life.ac.za', '1234', '1234'),
+(216646797, 'godfrey', 'mabena', '216646797@tut4life.ac.za', 'a', 'a'),
 (217409950, 'Ricky', 'Tala', '217409950@tut4life.ac.za', '1234', '1234');
 
 -- --------------------------------------------------------
@@ -159,19 +170,19 @@ INSERT INTO `student_record` (`stud_no`, `stud_name`, `surname`, `email`) VALUES
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
-  ADD PRIMARY KEY (`staff_no`);
+  ADD PRIMARY KEY (`Admin_ID`);
 
 --
 -- Indexes for table `booking`
 --
 ALTER TABLE `booking`
-  ADD PRIMARY KEY (`booking_no`);
+  ADD PRIMARY KEY (`Booking_ID`);
 
 --
 -- Indexes for table `lab`
 --
 ALTER TABLE `lab`
-  ADD PRIMARY KEY (`lab_no`);
+  ADD PRIMARY KEY (`Lab_Name`);
 
 --
 -- Indexes for table `lab_record`
@@ -205,19 +216,13 @@ ALTER TABLE `student_record`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `staff_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Admin_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216646799;
 
 --
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_no` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `lab`
---
-ALTER TABLE `lab`
-  MODIFY `lab_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `lab_record`
