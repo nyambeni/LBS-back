@@ -32,7 +32,7 @@ var forgotPassword = require('./routes/forgot_Password');
 
 //code to test the get function
 
-app.get('/',function(request,response){
+app.get('/j',function(request,response){
 
      response.send('hello from the server');
 })

@@ -15,8 +15,8 @@ exports.forgotPassword =async function(request, response)
         if (results.length > 0){
 
             var pas = results//this string returns the users password
-            response.send(pas);
-
+            response.send(JSON.stringify(pas));
+            //res.send(JSON.stringify(pas));
             //write a code to send email with that pas string
 
 
