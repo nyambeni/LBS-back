@@ -26,13 +26,14 @@ app.use(function (req, res, next) {
 var login = require('./routes/login');
 var registration = require('./routes/register');
 var forgotPassword = require('./routes/forgot_Password');
+var booking = require('./routes/Bookings');
 
 
 
 
 //code to test the get function
 
-app.get('/j',function(request,response){
+app.get('/',function(request,response){
 
      response.send('hello from the server');
 })
@@ -48,3 +49,4 @@ app.listen(PORT,function(){
 app.post('/registration',registration.register);
 app.post('/login',login.login);
 app.post('/forgotPassword',forgotPassword.forgotPassword);
+app.get('/availableLabs',booking.available);
