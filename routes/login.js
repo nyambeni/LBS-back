@@ -65,8 +65,8 @@ exports.adminLogin =async function(request, response) {
 
   
     //check if account exist
-     connection.query('select * from admin where Admin_ID = ? AND password =?',[Admin_ID,password], function(error, results, fields) {
-       if (results != 0) {
+     connection.query('select * from admin where Admin_ID = ? AND password =?',[Admin_ID,password], function(error, user, fields) {
+       if (user) {
            
            response.send('you have sucessfully loged in');
            
@@ -90,3 +90,53 @@ exports.adminLogin =async function(request, response) {
    }
 
   }
+
+
+
+
+  //login for lecturer
+
+
+
+
+exports.lecLogin =async function(request, response) { 
+
+
+  var lec_id = request.body.lec_id;
+  var password = request.body.password;
+
+  console.log(lec_id); 
+  console.log(password);
+
+  
+  if (lec_id && password) 
+  {
+
+  
+    //check if account exist
+     connection.query('select * from lecture where lec_id = ? AND password =?',[lec_id,password], function(error, results, fields) {
+       if (results.length > 0) {
+           
+           response.send('you have sucessfully loged in');
+           
+
+          
+
+         }else{
+           
+           response.send('incorrect username or password');
+           
+         }
+       
+
+     })//end of query
+    
+
+
+  }//end of if statements that checks that values are entered
+  else{
+   response.send('Please enter values');	
+   }
+
+  }
+
