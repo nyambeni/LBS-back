@@ -45,30 +45,28 @@ exports.login =async function(request, response) {
 }//end of call back function
 
 
+//login forn admin
 
 
 
 
+exports.adminLogin =async function(request, response) { 
 
 
-//call back function for route post FOR ADMIN
-exports.adminLogin =async function(request, response) {  
-
-
-  var admin_D = request.body.admin_D;
+  var Admin_ID = request.body.Admin_ID;
   var password = request.body.password;
 
-  console.log(admin_D); 
+  console.log(Admin_ID); 
   console.log(password);
 
   
-  if (admin_D && password) 
+  if (Admin_ID && password) 
   {
 
   
     //check if account exist
-     connection.query('select * from admin where admin_D = ? AND password =?',[admin_D,password], function(error, results, fields) {
-       if (results.length > 0) {
+     connection.query('select * from admin where Admin_ID = ? AND password =?',[Admin_ID,password], function(error, results, fields) {
+       if (results != 0) {
            
            response.send('you have sucessfully loged in');
            
@@ -91,7 +89,4 @@ exports.adminLogin =async function(request, response) {
    response.send('Please enter values');	
    }
 
-
-}//end of call back function
-
-
+  }
