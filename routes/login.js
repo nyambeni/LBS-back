@@ -45,98 +45,55 @@ exports.login =async function(request, response) {
 }//end of call back function
 
 
+
+var connection = require('../conn/conn'); 
+
+
 //login forn admin
-
-
 
 
 exports.adminLogin =async function(request, response) { 
 
 
-  var Admin_ID = request.body.Admin_ID;
-  var password = request.body.password;
-
-  console.log(Admin_ID); 
-  console.log(password);
-
+    var Admin_ID = request.body.Admin_ID;
+    var Admin_Pass = request.body.Admin_Pass;
   
-  if (Admin_ID && password) 
-  {
-
+    console.log(Admin_ID); 
+    console.log(Admin_Pass);
   
-    //check if account exist
-     connection.query('select * from admin where Admin_ID = ? AND password =?',[Admin_ID,password], function(error, user, fields) {
-       if (user) {
-           
-           response.send('you have sucessfully loged in');
-           
-
-          
-
-         }else{
-           
-           response.send('incorrect username or password');
-           
-         }
-       
-
-     })//end of query
     
-
-
-  }//end of if statements that checks that values are entered
-  else{
-   response.send('Please enter values');	
-   }
-
-  }
-
-
-
-
-  //login for lecturer
-
-
-
-
-exports.lecLogin =async function(request, response) { 
-
-
-  var lec_id = request.body.lec_id;
-  var password = request.body.password;
-
-  console.log(lec_id); 
-  console.log(password);
-
+    if (Admin_ID && Admin_Pass) 
+    {
   
-  if (lec_id && password) 
-  {
-
-  
-    //check if account exist
-     connection.query('select * from lecture where lec_id = ? AND password =?',[lec_id,password], function(error, results, fields) {
-       if (results.length > 0) {
-           
-           response.send('you have sucessfully loged in');
-           
-
-          
-
-         }else{
-           
-           response.send('incorrect username or password');
-           
-         }
-       
-
-     })//end of query
     
-
-
-  }//end of if statements that checks that values are entered
-  else{
-   response.send('Please enter values');	
-   }
-
-  }
-
+      //check if account exist
+       connection.query('select * from admin where Admin_ID = ? AND Admin_Pass =?',[Admin_ID,Admin_Pass], function(error, results, fields) {
+         
+         if ( results.length > 0) {
+             
+             response.send('you have sucessfully loged in');
+             
+  
+            
+  
+           }else{
+             
+             response.send('incorrect username or password');
+             
+           }
+         
+  
+       })//end of query
+      
+  
+  
+    }//end of if statements that checks that values are entered
+    else{
+     response.send('Please enter values');	
+     }
+  
+    }
+  
+  
+  
+  
