@@ -35,9 +35,10 @@ var booking = require('./routes/Bookings');
 
 app.get('/',function(request,response){
 
-     response.send('hello from the server');
+     let dt = new Date()
+     response.send(dt);
 })
-
+ 
 
 
 app.listen(PORT,function(){
@@ -50,3 +51,4 @@ app.post('/registration',registration.register);
 app.post('/login',login.login);
 app.post('/forgotPassword',forgotPassword.forgotPassword);
 app.get('/availableLabs',booking.available);
+app.get('/book',booking.labBooking);
