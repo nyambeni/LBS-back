@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2021 at 09:13 AM
+-- Generation Time: Aug 20, 2021 at 10:27 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -52,10 +52,9 @@ INSERT INTO `admin` (`Admin_ID`, `Admin_Name`, `Admin_Surname`, `Admin_Email`, `
 CREATE TABLE `booking` (
   `Booking_ID` int(11) NOT NULL,
   `Lab_Name` varchar(255) NOT NULL,
-  `Session` int(11) NOT NULL,
+  `Lab_Slot` varchar(1) NOT NULL,
   `Num_Bookings` int(11) NOT NULL,
-  `Stud_ID` int(11) NOT NULL,
-  `Lec_ID` int(11) NOT NULL
+  `Stud_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -65,10 +64,24 @@ CREATE TABLE `booking` (
 --
 
 CREATE TABLE `lab` (
+  `Lab_ID` int(11) NOT NULL,
   `Lab_Name` varchar(255) NOT NULL,
   `Lab_Capacity` int(11) NOT NULL,
-  `Lab_Duration` int(11) NOT NULL
+  `Lab_Slot` varchar(1) NOT NULL,
+  `Lab_availability` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lab`
+--
+
+INSERT INTO `lab` (`Lab_ID`, `Lab_Name`, `Lab_Capacity`, `Lab_Slot`, `Lab_availability`) VALUES
+(0, '10-120', 40, 'A', 41),
+(1, '10-120', 40, 'B', 0),
+(2, '10-138', 50, 'A', 51),
+(3, '10-138', 50, 'B', 0),
+(4, '10-140', 60, 'A', 61),
+(5, '10-140', 60, 'B', 0);
 
 -- --------------------------------------------------------
 
@@ -182,7 +195,7 @@ ALTER TABLE `booking`
 -- Indexes for table `lab`
 --
 ALTER TABLE `lab`
-  ADD PRIMARY KEY (`Lab_Name`);
+  ADD PRIMARY KEY (`Lab_ID`);
 
 --
 -- Indexes for table `lab_record`

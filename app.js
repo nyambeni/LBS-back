@@ -35,8 +35,9 @@ var booking = require('./routes/Bookings');
 
 app.get('/',function(request,response){
 
-     let dt = new Date()
-     response.send(dt);
+     let dt = new Date("T11:30")
+     
+      response.send(dt);
 })
  
 
@@ -51,8 +52,5 @@ app.post('/registration',registration.register);
 app.post('/login',login.login);
 app.post('/forgotPassword',forgotPassword.forgotPassword);
 app.get('/availableLabs',booking.available);
-<<<<<<< HEAD
 app.get('/book',booking.labBooking);
-=======
 app.post('/adminLogin', login.adminLogin);
->>>>>>> 7085a5818364f86f0547cd7307c82356dd40c41d
