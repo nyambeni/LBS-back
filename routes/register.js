@@ -3,6 +3,7 @@ var connection = require('../conn/conn');
 //var bcrypt = require('bcrypt'); 
 
 
+// register for student
 //call back function for route post
 exports.register =async function(request, response) 
 {  
@@ -48,7 +49,7 @@ exports.register =async function(request, response)
     
                     //if the user is not found
                     
-                                    var today = new Date();
+                                  
                                     var student1={
 
                                         "stud_no":request.body.stuNumber,
@@ -107,6 +108,6 @@ exports.register =async function(request, response)
 
 
 
-
+// register for lecture
 
 

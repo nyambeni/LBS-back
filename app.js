@@ -52,5 +52,6 @@ app.post('/registration',registration.register);
 app.post('/login',login.login);
 app.post('/forgotPassword',forgotPassword.forgotPassword);
 app.get('/availableLabs',booking.available);
-app.get('/book',booking.labBooking);
+app.post('/book',booking.labBooking);
 app.post('/adminLogin', login.adminLogin);
+app.get('/bookingStatus',booking.status);

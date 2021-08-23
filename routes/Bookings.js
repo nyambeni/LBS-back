@@ -1,6 +1,7 @@
 
 var connection = require('../conn/conn');
 const express = require('express');
+const e = require('express');
 
 
 
@@ -142,21 +143,146 @@ exports.labBooking=async function(request, response)
 {
     var labName = request.body.labName;
     var slot = request.body.slot;
+    var stuNumber = request.body.stuNumber;
 
      
     console.log(labName);
     console.log(slot);
+    console.log(stuNumber)
 
 
-    if(labName && slot){
+    if(labName && slot && stuNumber)
+    {
+
+        connection.query('SELECT * FROM booking WHERE Lab_Slot =? AND Lab_Name =? AND Stud_ID =? ',[slot,labName,stuNumber], function (error, results, fields)
+        {
+                if(results.length > 0)
+                {
+                    response.send('already booked a lab for this session');
+                }  
+                else 
+                {
+                    
+                      
+                    var booking1={
+
+                        "Lab_Name":request.body.labName,
+                        "Lab_Slot":request.body.slot,
+                        "Stud_ID":request.body.stuNumber,          
+                      
+               
+                    } ;
+
+                    connection.query('SELECT Lab_Slot from booking where Lab_Slot =? AND Stud_ID = ?',[slot,stuNumber], function (error, results, fields) {
+                    
+                    if(results.length == 0){
+                    connection.query('INSERT INTO booking SET ? ',[booking1], function (error, results, fields) {
+                      if (error) 
+                      {
+                       
+                        response.send('there are some error with query');
+                        
+                      }else
+                      {
+                      
+                        connection.query('UPDATE booking SET Stud_ID = ?,Num_Bookings = Num_Bookings +1 WHERE Stud_ID =?', [stuNumber,stuNumber],function (error, results, fields){
+            
+            
+                            response.send('successfully bookied for a lab');
+                        })
+                    
+                  
+                      }
+                    
+                    })//end of inserting
+                  }else{
+                      
+                    response.send('cant book for more than one lab at the same time');
+                    
+                            
+                  }
+                })
+                
+                    
+                }      
+           })
+        
+    } 
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           /* if(results.length > 0)
+            {
+          
+             
+        var booking1={
+
+            "Lab_Name":request.body.labName,
+            "Lab_Slot":request.body.slot,
+            "Stud_ID":request.body.stuNumber,          
+          
+   
+        } ;
+        connection.query('INSERT INTO booking SET ? ',[booking1], function (error, results, fields) {
+          if (error) 
+          {
+           
+            response.send('there are some error with query');
+            
+          }else
+          {
+          
+            connection.query('UPDATE booking SET Lab_Name =?,Lab_Slot = ?,Stud_ID = ?,Num_Bookings = Num_Bookings +1 WHERE Stud_ID =?', [labName,slot,stuNumber,stuNumber],function (error, results, fields){
+
+
+                response.send('successfully bookied for a lab');
+            })
+
+
+          }
+        })//end of inserting
+     
+    }else{
+
+        response.send('you have already booked a session for this time period');
+ 
+     
+    }
+      
        
-        connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_Name = ? AND Lab_Slot =? AND Lab_availability  < Lab_Capacity',[labName,slot], function(error, results, fields) { //checks the data
+    })// slot checking
+
+
+
+
+
+
+
+
+
+       
+        /*connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_Name = ? AND Lab_Slot =? AND Lab_availability  < Lab_Capacity',[labName,slot], function(error, results, fields) { //checks the data
             if (results.length > 0) {
                 
                 
         
              
-
+               
                 connection.query('UPDATE lab SET Lab_availability =  Lab_availability + 1  WHERE Lab_Slot =? AND Lab_Name =?',[slot,labName], function(error, results, fields){ //updates and makes a booking
 
                     if (error) 
@@ -164,7 +290,33 @@ exports.labBooking=async function(request, response)
                         response.send('there are some error with query');
                     }
                     else{
-                        response.send('you have successfully booked for a lab');
+                        
+                        var booking1={
+
+                            "Lab_Name":request.body.labName,
+                            "Lab_Slot":request.body.slot,
+                            "Stud_ID":request.body.stuNumber,          
+                          
+                   
+                        } 
+                        connection.query('INSERT INTO booking SET ? ',[booking1], function (error, results, fields) {
+                          if (error) {
+                           
+                            response.send('there are some error with query');
+                            
+                          }else{
+                            
+                            connection.query('UPDATE booking SET Num_bookings = Num_bookings +1 WHERE Stud_ID =?', [stuNumber],function (error, results, fields){
+
+
+                                response.send('successfully bookied for a lab');
+                            })
+                            
+                            
+                          }
+                        });//end of inserting data
+                        
+
                     }
                 })
                 
@@ -182,11 +334,33 @@ exports.labBooking=async function(request, response)
       
 
 
-    }
+    } 
     else
     {
         response.send('Please Choose a Lab and Slot to make a booking');
     }
+*/
+
+}
+
+
+exports.status=async function(request, response) {
+
+    var stuNumber = request.body.stuNumber;
+    console.log(stuNumber)
+
+    connection.query('SELECT * FROM booking Where Stud_ID =?',[stuNumber], function (error, results, fields) {
+        if (error) {
+         
+          response.send('there are some error with query');
+          
+        }else{
+          
+          response.send(results);
+          
+        }
+      });
+   
 
 
 }
