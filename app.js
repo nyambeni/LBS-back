@@ -1,4 +1,4 @@
-const express = require('express');
+ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 
@@ -54,4 +54,8 @@ app.post('/forgotPassword',forgotPassword.forgotPassword);
 app.get('/availableLabs',booking.available);
 app.post('/book',booking.labBooking);
 app.post('/adminLogin', login.adminLogin);
+<<<<<<< HEAD
 app.get('/bookingStatus',booking.status);
+=======
+app.post('/Lec_registration',registration.Lec_register)
+>>>>>>> 2ad1370d973eeeaab23fdca08692926acd7e0612
