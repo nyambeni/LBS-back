@@ -187,8 +187,17 @@ exports.labBooking=async function(request, response)
                       
                         connection.query('UPDATE booking SET Stud_ID = ?,Num_Bookings = Num_Bookings +1 WHERE Stud_ID =?', [stuNumber,stuNumber],function (error, results, fields){
             
-            
+                          connection.query('UPDATE lab SET Lab_availability =  Lab_availability + 1  WHERE Lab_Slot =? AND Lab_Name =?',[slot,labName], function(error, results, fields){ //updates and makes a booking
+
+                            if (error) 
+                            { 
+                                response.send('there are some error with query');
+                            }
+                            else{
                             response.send('successfully bookied for a lab');
+                            }
+
+                          })
                         })
                     
                   
