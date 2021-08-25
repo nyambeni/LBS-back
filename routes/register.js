@@ -109,9 +109,8 @@
     }
 
 
-<<<<<<< HEAD
+// HEAD
 // register for lecture
-=======
 
     exports.Lec_register =async function(request, response) 
     {  
@@ -139,8 +138,7 @@
        
         if ( lec_id && lec_name && lec_email && password && confirm ) 
         {
-        
->>>>>>> 2ad1370d973eeeaab23fdca08692926acd7e0612
+
 
               connection.query('select * from lecture_record where lec_id = ? ',[lec_id], function(error, results, fields) {
     
