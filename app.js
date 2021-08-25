@@ -55,15 +55,12 @@ app.post('/forgotPassword',forgotPassword.forgotPassword);
 app.get('/availableLabs',booking.available);
 app.post('/book',booking.labBooking);
 app.post('/adminLogin', login.adminLogin);
-<<<<<<< HEAD
 app.post('/bookingStatus',booking.status);
 app.post('/Lec_registration',registration.Lec_register)
 app.delete('/cancelBooking',booking.cancelBooking)
-=======
 app.get('/bookingStatus',booking.status);
 app.post('/lec_login',login.lec_login);
 app.post('/Lec_registration',registration.Lec_register)
 app.post('/updatePassword',profile.updatePassword);
-app.get('/profile',profile.profileDetails);
+app.post('/profile',profile.profileDetails);
 
->>>>>>> 2cb2f726182de22470ce97da742132cdcf344822

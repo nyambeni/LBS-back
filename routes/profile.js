@@ -18,11 +18,11 @@ exports.updatePassword =async function(request, response)
    {
         if(password == confirm)
         {
-            connection.query('UPDATE student SET password = ?, confirm = ? WHERE stud_no = stuNumber',[password,confirm,stuNumber], function(error, results, fields)
+            connection.query('UPDATE student SET password = ? , confirm = ? WHERE stud_no =?',[password,confirm,stuNumber], function(error, results, fields)
                 { 
                     if (error) 
                     { 
-                        esponse.send('there are some error with query');
+                        response.send('there are some error with query');
                     }
                     else
                     {  
@@ -38,13 +38,16 @@ exports.updatePassword =async function(request, response)
    }
 }
 
+
+
+
 exports.profileDetails =async function(request, response) {
 
     var stuNumber = request.body.stuNumber;
     console.log(stuNumber); 
 
     //fetch data from the student table
-    connection.query('SELECT * FROM student where stud_no = stuNumber',[stuNumber], function(error, results, fields) 
+    connection.query('SELECT * FROM student where stud_no =?',[stuNumber], function(error, results, fields) 
     { 
         response.send(results);
     });

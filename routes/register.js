@@ -109,29 +109,8 @@
     }
 
 
-<<<<<<< HEAD
 // register for lecture
-exports.Lec_register =async function(request, response) 
-{ 
-     //fetch data
-     var lec_id = request.body.stuNumber;
-     var lec_name = request.body.name;
-     var lec_email = request.body.surname;
-     var lec_surname = request.body.email;
-     var password = request.body.password;
-     var confirm = request.body.confirm;
-       
-     
-     console.log(lec_id);
-     console.log(lec_name);
-     console.log(lec_surname);
-     console.log(lec_email); 
-     console.log(password);
-     console.log(confirm);
 
-
-   if(lec_id && lec_name && lec_email && lec_surname && confirm && password){
-=======
 // HEAD
 // register for lecture
 
@@ -162,7 +141,6 @@ exports.Lec_register =async function(request, response)
         if ( lec_id && lec_name && lec_email && password && confirm ) 
         {
 
->>>>>>> 2cb2f726182de22470ce97da742132cdcf344822
 
               connection.query('select * from lecture_record where lec_id = ? ',[lec_id], function(error, results, fields) {
     
@@ -239,4 +217,5 @@ exports.Lec_register =async function(request, response)
             
         }
 
- 
+    
+
