@@ -27,7 +27,7 @@ var login = require('./routes/login');
 var registration = require('./routes/register');
 var forgotPassword = require('./routes/forgot_Password');
 var booking = require('./routes/Bookings');
-
+var profile = require('./routes/profile');
 
 
 
@@ -57,4 +57,6 @@ app.post('/adminLogin', login.adminLogin);
 app.get('/bookingStatus',booking.status);
 app.post('/lec_login',login.lec_login);
 app.post('/Lec_registration',registration.Lec_register)
+app.post('/updatePassword',profile.updatePassword);
+app.get('/profile',profile.profileDetails);
 
