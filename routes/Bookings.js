@@ -141,19 +141,25 @@ exports.available =async function(request, response)
 
 exports.labBooking=async function(request, response) 
 {
-    var labName = request.body.labName;
-    var slot = request.body.slot;
+    
     var stuNumber = request.body.stuNumber;
-
+    var labAndSlot = request.body.labAndSlot;
      
-    console.log(labName);
-    console.log(slot);
+    
+    
     console.log(stuNumber)
+    console.log(labAndSlot);
 
 
-    if(labName && slot && stuNumber)
+    if(stuNumber && labAndSlot)
     {
+        var labName = labAndSlot.substr(0,6);
+        var slot = labAndSlot.substr(16,1);
+        var text = stuNumber;
 
+       // response.send(labName + " "+slot )
+        //response.send(text)
+   
         connection.query('SELECT * FROM booking WHERE Lab_Slot =? AND Lab_Name =? AND Stud_ID =? ',[slot,labName,stuNumber], function (error, results, fields)
         {
                 if(results.length > 0)
@@ -166,8 +172,8 @@ exports.labBooking=async function(request, response)
                       
                     var booking1={
 
-                        "Lab_Name":request.body.labName,
-                        "Lab_Slot":request.body.slot,
+                        "Lab_Name":labName,
+                        "Lab_Slot":slot,
                         "Stud_ID":request.body.stuNumber,          
                       
                
@@ -194,7 +200,7 @@ exports.labBooking=async function(request, response)
                                 response.send('there are some error with query');
                             }
                             else{
-                            response.send('successfully bookied for a lab');
+                            response.send("you have successfully booked for a lab");
                             }
 
                           })// end of query for updation availability 
@@ -215,7 +221,7 @@ exports.labBooking=async function(request, response)
                     
                 }      
            })
-        
+       
     } 
            
 
