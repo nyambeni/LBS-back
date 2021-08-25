@@ -109,38 +109,27 @@
     }
 
 
-<<<<<<< HEAD
 // register for lecture
-=======
-
-    exports.Lec_register =async function(request, response) 
-    {  
-    
-        //fetch data
-        var lec_id=request.body.lec_id;
-        var lec_name = request.body.lec_name;
-        
-        var lec_email = request.body.lec_email;
-        var password = request.body.password;
-        var confirm = request.body.confirm;
-          
-        
-     
-        console.log(lec_name);
-        console.log(lec_email);
-        console.log(lec_id); 
-        console.log(password);
-        console.log(confirm);
-    
-        //validation email stuNumber@tut4life.ac.za
-        var stringEmail = lec_id +"@tut4life.ac.za";
-        
-    
+exports.Lec_register =async function(request, response) 
+{ 
+     //fetch data
+     var lec_id = request.body.stuNumber;
+     var lec_name = request.body.name;
+     var lec_email = request.body.surname;
+     var lec_surname = request.body.email;
+     var password = request.body.password;
+     var confirm = request.body.confirm;
        
-        if ( lec_id && lec_name && lec_email && password && confirm ) 
-        {
-        
->>>>>>> 2ad1370d973eeeaab23fdca08692926acd7e0612
+     
+     console.log(lec_id);
+     console.log(lec_name);
+     console.log(lec_surname);
+     console.log(lec_email); 
+     console.log(password);
+     console.log(confirm);
+
+
+   if(lec_id && lec_name && lec_email && lec_surname && confirm && password){
 
               connection.query('select * from lecture_record where lec_id = ? ',[lec_id], function(error, results, fields) {
     

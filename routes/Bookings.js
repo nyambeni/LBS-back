@@ -197,8 +197,8 @@ exports.labBooking=async function(request, response)
                             response.send('successfully bookied for a lab');
                             }
 
-                          })
-                        })
+                          })// end of query for updation availability 
+                        })// end of query for booking
                     
                   
                       }
@@ -218,137 +218,7 @@ exports.labBooking=async function(request, response)
         
     } 
            
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           /* if(results.length > 0)
-            {
-          
-             
-        var booking1={
 
-            "Lab_Name":request.body.labName,
-            "Lab_Slot":request.body.slot,
-            "Stud_ID":request.body.stuNumber,          
-          
-   
-        } ;
-        connection.query('INSERT INTO booking SET ? ',[booking1], function (error, results, fields) {
-          if (error) 
-          {
-           
-            response.send('there are some error with query');
-            
-          }else
-          {
-          
-            connection.query('UPDATE booking SET Lab_Name =?,Lab_Slot = ?,Stud_ID = ?,Num_Bookings = Num_Bookings +1 WHERE Stud_ID =?', [labName,slot,stuNumber,stuNumber],function (error, results, fields){
-
-
-                response.send('successfully bookied for a lab');
-            })
-
-
-          }
-        })//end of inserting
-     
-    }else{
-
-        response.send('you have already booked a session for this time period');
- 
-     
-    }
-      
-       
-    })// slot checking
-
-
-
-
-
-
-
-
-
-       
-        /*connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_Name = ? AND Lab_Slot =? AND Lab_availability  < Lab_Capacity',[labName,slot], function(error, results, fields) { //checks the data
-            if (results.length > 0) {
-                
-                
-        
-             
-               
-                connection.query('UPDATE lab SET Lab_availability =  Lab_availability + 1  WHERE Lab_Slot =? AND Lab_Name =?',[slot,labName], function(error, results, fields){ //updates and makes a booking
-
-                    if (error) 
-                    { 
-                        response.send('there are some error with query');
-                    }
-                    else{
-                        
-                        var booking1={
-
-                            "Lab_Name":request.body.labName,
-                            "Lab_Slot":request.body.slot,
-                            "Stud_ID":request.body.stuNumber,          
-                          
-                   
-                        } 
-                        connection.query('INSERT INTO booking SET ? ',[booking1], function (error, results, fields) {
-                          if (error) {
-                           
-                            response.send('there are some error with query');
-                            
-                          }else{
-                            
-                            connection.query('UPDATE booking SET Num_bookings = Num_bookings +1 WHERE Stud_ID =?', [stuNumber],function (error, results, fields){
-
-
-                                response.send('successfully bookied for a lab');
-                            })
-                            
-                            
-                          }
-                        });//end of inserting data
-                        
-
-                    }
-                })
-                
-    
-               
-    
-              }else{
-                
-                response.send('lab is already full');
-                
-              }
-            
-    
-          })//end of query
-      
-
-
-    } 
-    else
-    {
-        response.send('Please Choose a Lab and Slot to make a booking');
-    }
-*/
 
 }
 
@@ -371,5 +241,52 @@ exports.status=async function(request, response) {
       });
    
 
+
+}
+
+
+//APi for cancelling a bookng
+exports.cancelBooking=async function(request, response) {
+
+
+  var id = request.body.id
+  var labName = request.body.labName;
+  var slot = request.body.slot;
+  var stuNumber = request.body.stuNumber;
+
+   
+  console.log(labName);
+  console.log(slot);
+  console.log(stuNumber)
+  console.log(id)
+
+
+
+
+
+  connection.query('DELETE  FROM booking where Booking_ID=?  AND Lab_Name =? AND Lab_Slot =? AND Stud_ID' , [id,labName,slot,stuNumber], function (error, results, fields) {
+	  if (error) {}else{
+	  
+   
+    connection.query('UPDATE lab SET Lab_availability =  Lab_availability -1   WHERE Lab_Slot =? AND Lab_Name =?',[slot,labName], function(error, results, fields){ //updates and makes a booking
+
+      if (error) 
+      { 
+          response.send('there are some error with query');
+      }
+      else{
+      response.send('booking has been cancelled');
+      }
+    
+    })
+
+  }
+
+
+
+
+
+
+	});
 
 }

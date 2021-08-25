@@ -49,10 +49,12 @@ app.listen(PORT,function(){
 
 //routers for login and registration
 app.post('/registration',registration.register);
+app.get('/login',login.login);
 app.post('/login',login.login);
 app.post('/forgotPassword',forgotPassword.forgotPassword);
 app.get('/availableLabs',booking.available);
 app.post('/book',booking.labBooking);
 app.post('/adminLogin', login.adminLogin);
-app.get('/bookingStatus',booking.status);
+app.post('/bookingStatus',booking.status);
 app.post('/Lec_registration',registration.Lec_register)
+app.delete('/cancelBooking',booking.cancelBooking)

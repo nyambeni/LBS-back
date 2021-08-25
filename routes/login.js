@@ -22,9 +22,7 @@ exports.login =async function(request, response) {
             
           
             response.send(results);
-            
-             
-           
+
 
           }else{
             
