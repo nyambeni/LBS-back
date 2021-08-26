@@ -17,7 +17,7 @@ exports.login =async function(request, response) {
 
    
      //check if account exist
-      connection.query('select stud_no, stu_name, stud_surname from student where stud_no = ? AND password =?',[stuNumber,password], function(error, results, fields) {
+      connection.query('select * from student where stud_no = ? AND password =?',[stuNumber,password], function(error, results, fields) {
         if (results.length > 0) {
             
           
