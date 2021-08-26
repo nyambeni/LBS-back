@@ -149,7 +149,7 @@
                     if(lec_email == stringEmail){
     
                     
-                    // check if user exists
+                    // check if user exists j
               
                     connection.query('SELECT * FROM lecture where lec_id = ?', [lec_id], function(error, results, fields) 
                  {
