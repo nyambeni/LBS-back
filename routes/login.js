@@ -102,7 +102,7 @@ exports.adminLogin =async function(request, response) {
     exports.lec_login =async function(request, response) { 
     
     
-        var lec_id = request.body.lec_id;
+        var lec_id = request.body.stuNumber;
         var password = request.body.password;
       
         console.log(lec_id); 

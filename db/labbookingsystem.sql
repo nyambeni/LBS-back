@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2021 at 10:27 AM
+-- Generation Time: Aug 26, 2021 at 08:41 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -53,9 +53,18 @@ CREATE TABLE `booking` (
   `Booking_ID` int(11) NOT NULL,
   `Lab_Name` varchar(255) NOT NULL,
   `Lab_Slot` varchar(1) NOT NULL,
-  `Num_Bookings` int(11) NOT NULL,
-  `Stud_ID` int(11) NOT NULL
+  `Stud_ID` int(11) NOT NULL,
+  `Num_Bookings` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`Booking_ID`, `Lab_Name`, `Lab_Slot`, `Stud_ID`, `Num_Bookings`) VALUES
+(38, '10-138', 'A', 217409950, 2),
+(39, '10-138', 'B', 217409950, 1),
+(40, '10-138', 'B', 216646797, 1);
 
 -- --------------------------------------------------------
 
@@ -77,11 +86,11 @@ CREATE TABLE `lab` (
 
 INSERT INTO `lab` (`Lab_ID`, `Lab_Name`, `Lab_Capacity`, `Lab_Slot`, `Lab_availability`) VALUES
 (0, '10-120', 40, 'A', 41),
-(1, '10-120', 40, 'B', 0),
+(1, '10-120', 40, 'B', 12),
 (2, '10-138', 50, 'A', 51),
 (3, '10-138', 50, 'B', 0),
 (4, '10-140', 60, 'A', 61),
-(5, '10-140', 60, 'B', 0);
+(5, '10-140', 60, 'B', 6);
 
 -- --------------------------------------------------------
 
@@ -109,6 +118,31 @@ CREATE TABLE `lecture` (
   `password` varchar(255) NOT NULL,
   `confirm` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lecture`
+--
+
+INSERT INTO `lecture` (`lec_id`, `lec_name`, `lec_email`, `password`, `confirm`) VALUES
+(216646797, 0, 216646797, 'a', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecture_record`
+--
+
+CREATE TABLE `lecture_record` (
+  `lec_id` int(11) NOT NULL,
+  `lec_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lecture_record`
+--
+
+INSERT INTO `lecture_record` (`lec_id`, `lec_name`) VALUES
+(216646797, 'jfjf');
 
 -- --------------------------------------------------------
 
@@ -204,6 +238,12 @@ ALTER TABLE `lab_record`
   ADD PRIMARY KEY (`lab_no`);
 
 --
+-- Indexes for table `lecture_record`
+--
+ALTER TABLE `lecture_record`
+  ADD PRIMARY KEY (`lec_id`);
+
+--
 -- Indexes for table `slot`
 --
 ALTER TABLE `slot`
@@ -235,7 +275,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `lab_record`

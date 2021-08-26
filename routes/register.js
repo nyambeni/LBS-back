@@ -118,10 +118,10 @@
     {  
     
         //fetch data
-        var lec_id=request.body.lec_id;
-        var lec_name = request.body.lec_name;
+        var lec_id=request.body.stuNumber;
+        var lec_name = request.body.name;
         
-        var lec_email = request.body.lec_email;
+        var lec_email = request.body.email;
         var password = request.body.password;
         var confirm = request.body.confirm;
           
@@ -164,10 +164,10 @@
                                         
                                         var new_lecture={
     
-                                            "lec_id":request.body.lec_id,
-                                            "lec_name":request.body.lec_name,
+                                            "lec_id":request.body.stuNumber,
+                                            "lec_name":request.body.name,
                                                     
-                                            "lec_email":request.body.lec_email,
+                                            "lec_email":request.body.email,
                                             "password":request.body.password, 
                                             "confirm":request.body.confirm,
                                    
