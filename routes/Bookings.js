@@ -10,125 +10,145 @@ const e = require('express');
 exports.available =async function(request, response) 
 {
 
-    var time = 10;
-
-  
-
-    // else if statements to show available labs 
-    if (time == 10  )
-    {
-        
    
-      var slot = 'A';
+    let dt = JSON.stringify(new Date)
+    let date = dt.substr(1,10)
+    let time = dt.substr(12,2);
 
-       //update availability since slot time is over
-        connection.query('UPDATE lab SET Lab_availability =  Lab_Capacity + 1  WHERE Lab_Slot =? ',[slot], function(error, results, fields)  
-        {
-        
-            if (error) 
-            { 
-                response.send('there are some error with query');
-            }
-            else{
-                  connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_availability  < Lab_Capacity', function(error, results, fields)  {
+    let currentTime = time;
+
+   
+    connection.query('SELECT * FROM lab WHERE Lab_Date = ? ',[date], function(error, results, fields)  
+      {
+          if(results.length > 0){
+            if (currentTime == 9  ) //session for 8 should disapper at 9 (slot A)
+            {
+                
            
+              var slot = 'A';
+        
+               //update availability since slot time is over
+                connection.query('UPDATE lab SET Lab_availability =  Lab_Capacity + 1  WHERE Lab_Slot =?  AND Lab_Date =?',[slot,date], function(error, results, fields)  
+                {
+                
+                    if (error) 
+                    { 
+                        response.send('there are some error with query');
+                    }
+                    else{
+                          connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_availability  < Lab_Capacity AND Lab_Date =?',[date], function(error, results, fields)  {
+                   
+                            if (results.length > 0)
+                            {
+          
+                                
+                                response.send(results);
+        
+                               
+                            }
+                            else{
+                                response.send('all labs are booked for the day');
+                            }
+        
+        
+                       })
+                    }
+               })
+            }
+          else if (currentTime == 10 )//session for 9 to 10 should disapper at 10 (slot B)
+            {
+        
+                var slot = 'B';
+        
+                //update availability since slot time is over
+                 connection.query('UPDATE lab SET Lab_availability =  Lab_Capacity + 1  WHERE Lab_Slot =? AND Lab_Date =?',[slot,date], function(error, results, fields)  
+                 {
+                 
+                     if (error) 
+                     { 
+                         response.send('there are some error with query');
+                     }
+                     else{
+                           connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_availability  < Lab_Capacity AND Lab_Date =?',[date], function(error, results, fields)  {
+                    
+                             if (results.length > 0)
+                             {
+                                response.send(results);
+                             }
+                             else{
+                                response.send('all labs are booked for the day');
+                             }
+         
+         
+                        })
+                     }
+                })
+            }
+            else if(currentTime  == 23){ //time from 10pm to 10.05 should set everything to 0
+        
+        
+                
+        
+                //update availability since slot time is over
+                 connection.query('UPDATE lab SET Lab_availability =  0  WHERE  Lab_Date =?',[date],function(error, results, fields)  
+                 {
+                 
+                     if (error) 
+                     { 
+                         response.send('there are some error with query');
+                     }
+                     else{
+                           connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_availability  < Lab_Capacity AND Lab_Date =?',[date], function(error, results, fields)  {
+                    
+                             if (results.length > 0)
+                             {
+                                response.send(results);
+                             }
+                             else
+                             {
+                                response.send('all labs are booked for the day');
+                             }
+         
+         
+                        })
+                     }
+                })
+            
+                   
+        
+            }
+            else
+            {
+        
+                connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_availability  < Lab_Capacity AND Lab_Date =?',[date], function(error, results, fields) 
+                 {
+                    
                     if (results.length > 0)
                     {
-  
-                        
-                        response.send(results);
-
-                       
+                       response.send(results);
                     }
                     else{
                         response.send('all labs are booked for the day');
                     }
-
-
-               })
-            }
-       })
-    }
-  else if (time == 12 )
-    {
-
-        var slot = 'B';
-
-        //update availability since slot time is over
-         connection.query('UPDATE lab SET Lab_availability =  Lab_Capacity + 1  WHERE Lab_Slot =? ',[slot], function(error, results, fields)  
-         {
-         
-             if (error) 
-             { 
-                 response.send('there are some error with query');
-             }
-             else{
-                   connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_availability  < Lab_Capacity', function(error, results, fields)  {
-            
-                     if (results.length > 0)
-                     {
-                        response.send(results);
-                     }
-                     else{
-                        response.send('all labs are booked for the day');
-                     }
- 
- 
-                })
-             }
-        })
-    }
-    else if(time > 13  &&  time <= 14 ){ //time from 10pm to 10.05 should set everything to 0
-
-
+                  
         
-
-        //update availability since slot time is over
-         connection.query('UPDATE lab SET Lab_availability =  0 ' ,function(error, results, fields)  
-         {
-         
-             if (error) 
-             { 
-                 response.send('there are some error with query');
-             }
-             else{
-                   connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_availability  < Lab_Capacity', function(error, results, fields)  {
-            
-                     if (results.length > 0)
-                     {
-                        response.send(results);
-                     }
-                     else
-                     {
-                        response.send('all labs are booked for the day');
-                     }
- 
- 
                 })
-             }
-        })
-    
-           
+        
+           }
+          }
+          else{
 
-    }
-    else
-    {
+            response.send('no labs published for this day');
+          }
 
-        connection.query('SELECT Lab_Name, Lab_Slot FROM lab WHERE Lab_availability  < Lab_Capacity', function(error, results, fields) 
-         {
-            
-            if (results.length > 0)
-            {
-               response.send(results);
-            }
-            else{
-                response.send('all labs are booked for the day');
-            }
-          
 
-        })
+      })// end of checking for todays date
+      
 
-   }
+
+
+    // else if statements to show available labs 
+   
 
 }
 
