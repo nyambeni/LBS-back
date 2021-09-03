@@ -28,17 +28,22 @@ var registration = require('./routes/register');
 var forgotPassword = require('./routes/forgot_Password');
 var booking = require('./routes/Bookings');
 var profile = require('./routes/profile');
-
+var admin = require('./routes/admin');
 
 
 //code to test the get function
 
-app.get('/',function(request,response){
+app.get('/j',function(request,response){
 
-     let dt = new Date("T11:30")
-     
-      response.send(dt);
+     let dt = JSON.stringify(new Date)
+     let date = dt.substr(1,10)
+     let time =dt.substr(12,2);
+    
+    response.send(dt)
+    
+    
 })
+     
  
 
 
@@ -63,4 +68,5 @@ app.post('/lec_login',login.lec_login);
 app.post('/Lec_registration',registration.Lec_register)
 app.post('/updatePassword',profile.updatePassword);
 app.post('/profile',profile.profileDetails);
+app.post('/lab_Schedule',admin.lab_Schedule);
 
