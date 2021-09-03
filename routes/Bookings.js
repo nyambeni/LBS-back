@@ -10,7 +10,7 @@ const e = require('express');
 exports.available =async function(request, response) 
 {
 
-    var time = 10;
+    var time = 7;
 
   
 
