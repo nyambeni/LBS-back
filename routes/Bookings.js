@@ -10,14 +10,13 @@ const e = require('express');
 exports.available =async function(request, response) 
 {
 
-<<<<<<< HEAD
-    var time = 7;
-=======
+
+    
    
     let dt = JSON.stringify(new Date)
     let date = dt.substr(1,10)
     let time = dt.substr(12,2);
->>>>>>> 4c8c42d07146bda7edcb3667c8e18fff8646c7b5
+
 
     let currentTime = time;
 

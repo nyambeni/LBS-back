@@ -31,6 +31,7 @@ var profile = require('./routes/profile');
 var admin = require('./routes/admin');
 
 
+
 //code to test the get function
 
 app.get('/j',function(request,response){
@@ -69,4 +70,4 @@ app.post('/Lec_registration',registration.Lec_register)
 app.post('/updatePassword',profile.updatePassword);
 app.post('/profile',profile.profileDetails);
 app.post('/lab_Schedule',admin.lab_Schedule);
-
+app.post('/notification',admin.notification);  
