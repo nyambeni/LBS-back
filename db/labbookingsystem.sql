@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 31, 2021 at 03:41 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Host: localhost
+-- Generation Time: Sep 08, 2021 at 09:43 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 7.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,6 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`Admin_ID`, `Admin_Name`, `Admin_Surname`, `Admin_Email`, `Admin_Pass`, `Booking_ID`) VALUES
+(1234, 'zwlkh', 'masilela', 'masilela@gmail.com', 'pass1', 32),
 (216646797, 'Godfrey', 'Mabena', 'Godfrey555mabena@gmail.com', '1234', 0);
 
 -- --------------------------------------------------------
@@ -64,8 +65,7 @@ CREATE TABLE `booking` (
 INSERT INTO `booking` (`Booking_ID`, `Lab_Name`, `Lab_Slot`, `Stud_ID`, `Num_Bookings`) VALUES
 (38, '10-138', 'A', 217409950, 2),
 (39, '10-138', 'B', 217409950, 1),
-(40, '10-138', 'B', 216646797, 1),
-(41, '10-138', 'A', 216646798, 1);
+(40, '10-138', 'B', 216646797, 1);
 
 -- --------------------------------------------------------
 
@@ -81,15 +81,6 @@ CREATE TABLE `lab` (
   `Lab_availability` int(11) NOT NULL,
   `Lab_Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `lab`
---
-
-INSERT INTO `lab` (`Lab_ID`, `Lab_Name`, `Lab_Capacity`, `Lab_Slot`, `Lab_availability`, `Lab_Date`) VALUES
-(2, '10-120', 40, 'A', 38, '2021-08-31'),
-(4, '10-140', 40, 'C', 0, '2021-08-31'),
-(5, '10-140', 40, 'B', 0, '2021-08-31');
 
 -- --------------------------------------------------------
 
@@ -142,6 +133,27 @@ CREATE TABLE `lecture_record` (
 
 INSERT INTO `lecture_record` (`lec_id`, `lec_name`) VALUES
 (216646797, 'jfjf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `Notification_ID` int(10) NOT NULL,
+  `Notification` varchar(500) NOT NULL,
+  `Notification_Date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`Notification_ID`, `Notification`, `Notification_Date`) VALUES
+(1, 'pass1     loreum opseum bla', '2007-07-21'),
+(2, 'pass1     loreum opseum bla', '2021-09-06'),
+(3, 'pass1     loreum opseum bjjla', '2021-09-06');
 
 -- --------------------------------------------------------
 
@@ -225,12 +237,6 @@ ALTER TABLE `booking`
   ADD PRIMARY KEY (`Booking_ID`);
 
 --
--- Indexes for table `lab`
---
-ALTER TABLE `lab`
-  ADD PRIMARY KEY (`Lab_ID`);
-
---
 -- Indexes for table `lab_record`
 --
 ALTER TABLE `lab_record`
@@ -241,6 +247,12 @@ ALTER TABLE `lab_record`
 --
 ALTER TABLE `lecture_record`
   ADD PRIMARY KEY (`lec_id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`Notification_ID`);
 
 --
 -- Indexes for table `slot`
@@ -274,19 +286,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
---
--- AUTO_INCREMENT for table `lab`
---
-ALTER TABLE `lab`
-  MODIFY `Lab_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Booking_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `lab_record`
 --
 ALTER TABLE `lab_record`
   MODIFY `lab_no` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `Notification_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `slot`

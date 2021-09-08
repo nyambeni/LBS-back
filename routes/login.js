@@ -54,8 +54,8 @@ var connection = require('../conn/conn');
 exports.adminLogin =async function(request, response) { 
 
 
-    var Admin_ID = request.body.Admin_ID;
-    var Admin_Pass = request.body.Admin_Pass;
+    var Admin_ID = request.body.stuNumber;
+    var Admin_Pass = request.body.password;
   
     console.log(Admin_ID); 
     console.log(Admin_Pass);
@@ -70,7 +70,7 @@ exports.adminLogin =async function(request, response) {
          
          if ( results.length > 0) {
              
-             response.send('you have sucessfully loged in');
+             response.send(results);
              
   
             
